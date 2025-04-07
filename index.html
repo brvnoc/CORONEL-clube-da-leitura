@@ -6,92 +6,104 @@
   <title>Clube da Leitura - Escola Coronel Joaquim Freitas Melro</title>
   <style>
     :root {
-      --roxo-escuro: #4b2e83;
-      --roxo-medio: #673ab7;
-      --cinza-claro: #f3f3f3;
-      --cinza: #eee;
-      --fonte-principal: 'Segoe UI', sans-serif;
+      --fundo-vintage: #fff8e7;
+      --marrom-claro: #8b5e3c;
+      --marrom-escuro: #4e342e;
+      --bege: #f5e6cc;
+      --fundo-cabecalho: #3e2723;
+      --dourado-suave: #bfa06f;
+      --fonte-antiga: 'Georgia', serif;
     }
 
     body {
       margin: 0;
-      font-family: var(--fonte-principal);
-      background-color: #fefefe;
-      color: #333;
-      line-height: 1.6;
+      font-family: var(--fonte-antiga);
+      background-color: var(--fundo-vintage);
+      color: var(--marrom-escuro);
+      line-height: 1.7;
     }
+
     header {
-      background-color: var(--roxo-escuro);
-      color: white;
-      padding: 30px 20px;
+      background-color: var(--fundo-cabecalho);
+      color: var(--dourado-suave);
+      padding: 40px 20px;
       text-align: center;
+      border-bottom: 4px dashed var(--dourado-suave);
     }
+
     nav {
-      background-color: var(--roxo-medio);
-      padding: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
+      background-color: var(--marrom-claro);
+      padding: 15px;
+      text-align: center;
+      border-bottom: 3px solid var(--marrom-escuro);
     }
+
     nav a {
-      color: white;
+      color: var(--bege);
       text-decoration: none;
+      margin: 0 12px;
       font-weight: bold;
-      padding: 6px 12px;
-      border-radius: 6px;
+      font-size: 1.1rem;
+      transition: 0.3s;
     }
-    nav a:focus, nav a:hover {
+
+    nav a:hover {
       text-decoration: underline;
-      outline: 2px solid yellow;
-      background-color: #5e35b1;
+      color: var(--dourado-suave);
     }
+
     section {
-      padding: 50px 20px;
-      max-width: 1000px;
+      padding: 40px 20px;
+      max-width: 960px;
       margin: auto;
     }
+
     h2 {
-      color: var(--roxo-escuro);
+      color: var(--marrom-claro);
+      border-bottom: 2px dotted var(--marrom-claro);
+      padding-bottom: 5px;
     }
-    .resenha {
-      background: var(--cinza);
-      padding: 15px;
-      border-left: 5px solid var(--roxo-escuro);
-      margin-bottom: 20px;
+
+    .card, .resenha {
+      background-color: var(--bege);
+      padding: 20px;
+      margin-top: 20px;
+      border-left: 8px double var(--marrom-claro);
+      border-radius: 8px;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
     }
+
     .galeria {
       display: flex;
       flex-wrap: wrap;
+      gap: 20px;
       justify-content: center;
-      gap: 15px;
     }
+
     .galeria img {
-      width: 100%;
-      max-width: 280px;
+      max-width: 270px;
+      border: 4px solid var(--marrom-claro);
       border-radius: 10px;
-      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      filter: sepia(0.3);
     }
-    .card {
-      background-color: var(--cinza-claro);
-      border-radius: 10px;
-      padding: 25px;
-      margin: 15px 0;
-      box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
-    }
+
     footer {
-      background: var(--roxo-escuro);
-      color: white;
+      background-color: var(--fundo-cabecalho);
+      color: var(--bege);
       text-align: center;
-      padding: 25px 20px;
+      padding: 20px;
       font-size: 0.9rem;
+      border-top: 4px dashed var(--dourado-suave);
     }
+
     a {
-      color: var(--roxo-escuro);
+      color: var(--marrom-escuro);
     }
+
     ul {
       padding-left: 20px;
     }
+
     li {
       margin-bottom: 10px;
     }
@@ -108,7 +120,7 @@
     <a href="#professores">Professores</a>
     <a href="#alunos">Alunos</a>
     <a href="#galeria">Galeria</a>
-    <a href="#oficinas">Oficinas e Eventos</a>
+    <a href="#oficinas">Oficinas</a>
     <a href="#contato">Contato</a>
   </nav>
 
@@ -116,7 +128,7 @@
     <section id="sobre">
       <h2 tabindex="0">Sobre o Clube</h2>
       <div class="card">
-        <p>O Clube da Leitura é um espaço para incentivar a leitura, a escrita e a criatividade entre os estudantes da nossa escola. Com encontros semanais, leituras compartilhadas e produções autorais, o clube fortalece o gosto pela literatura e pela troca de ideias.</p>
+        <p>O Clube da Leitura é um espaço que celebra a paixão pelos livros e a imaginação criativa. Com encontros regulares, leituras em grupo e oficinas literárias, os alunos são convidados a explorar mundos fantásticos e a criar suas próprias histórias.</p>
       </div>
     </section>
 
@@ -124,9 +136,9 @@
       <h2 tabindex="0">Professores Envolvidos</h2>
       <div class="card">
         <ul>
-          <li><strong>Prof. Bruno Lima</strong> – Idealizador do projeto e orientador dos encontros.</li>
-          <li><strong>Profª. Cleide</strong> – Apoio pedagógico e responsável pelas leituras guiadas.</li>
-          <li><strong>Prof. Avaninho</strong> – Conduz oficinas de escrita criativa e projetos literários.</li>
+          <li><strong>Prof. Bruno Lima</strong> – Idealizador e mentor do projeto.</li>
+          <li><strong>Profª. Caline</strong> – Responsável por mediações de leitura.</li>
+          <li><strong>Prof. Elizandra</strong> – Facilitadora de oficinas criativas.</li>
         </ul>
       </div>
     </section>
@@ -134,7 +146,7 @@
     <section id="alunos">
       <h2 tabindex="0">Participação dos Alunos</h2>
       <div class="card">
-        <p>Alunos do 6º ao 9º ano participam das atividades do clube. Todos os meses, eles se reúnem para discutir livros, criar textos autorais e montar exposições literárias. A cada encontro, um grupo de estudantes apresenta sua leitura favorita e compartilha impressões.</p>
+        <p>Estudantes do 6º ao 9º ano são os grandes protagonistas das atividades. A cada mês, eles mergulham em leituras envolventes, partilham experiências e constroem juntos um repertório literário que vai da poesia ao conto.</p>
       </div>
     </section>
 
@@ -162,16 +174,16 @@
     <section id="contato">
       <h2 tabindex="0">Contato</h2>
       <div class="card">
-        <p>📧 Email: <a href="mailto:escola@exemplo.com">escola@exemplo.com</a></p>
-        <p>📍 Endereço: Rua Principal, S/N, Belo Monte - AL</p>
-        <p>📞 Telefone: (82) 99999-9999</p>
-        <p>📱 Instagram: <a href="https://instagram.com/reveriescrita" target="_blank">@reveriescrita</a></p>
+        <p>📧 Email: <a href="mailto:clubedaleituracoronel@gmail.com">clubedaleituracoronel@gmail.com</a></p>
+        <p>📍 Endereço: Povoado Olho D'água Novo S/N, Belo Monte - AL</p>
+        <p>📞 Telefone: (82) 99915-5372</p>
+        <p>📱 Instagram: <a href="https://instagram.com/lp.brunolima" target="_blank">@lp.brunolima</a></p>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Clube da Leitura - Escola Coronel Joaquim Freitas Melro. Desenvolvido com ♥ por alunos e professores.</p>
+    <p>&copy; 2025 Clube da Leitura - Escola Coronel Joaquim Freitas Melro. Criado com afeto por leitores e sonhadores.</p>
   </footer>
 </body>
 </html>
