@@ -136,11 +136,37 @@
       <h2 tabindex="0">Professores Envolvidos</h2>
       <div class="card">
         <ul>
-          <li><strong>Prof. Bruno Lima</strong> – Idealizador e mentor do projeto.</li>
+          <li>
+            <strong>Prof. Bruno Lima</strong> – Idealizador e mentor do projeto. 
+            <p>Professor de Língua Portuguesa, escritor e pesquisador. Membro da União Brasileira de Escritores (UBE), atua na promoção da leitura e da escrita criativa no interior de Alagoas. Também desenvolve pesquisas na área de ensino de língua, com foco na valorização da diversidade cultural e linguística.</p>
+          </li>
           <li><strong>Profª. Caline</strong> – Responsável por mediações de leitura.</li>
           <li><strong>Prof. Elizandra</strong> – Facilitadora de oficinas criativas.</li>
         </ul>
       </div>
+    </section>
+
+    <section id="cadastro" style="max-width: 600px; margin: 0 auto; padding: 2rem;">
+      <h2 style="text-align: center; font-family: Arial, sans-serif;">Cadastro</h2>
+      <form action="/enviar-cadastro" method="POST" style="display: flex; flex-direction: column; gap: 1rem;">
+
+        <label for="nome">Nome completo:</label>
+        <input type="text" id="nome" name="nome" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" name="telefone" placeholder="(xx) xxxxx-xxxx" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+
+        <label for="mensagem">Mensagem ou observações:</label>
+        <textarea id="mensagem" name="mensagem" rows="4" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+
+        <button type="submit" style="padding: 0.75rem; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+          Enviar Cadastro
+        </button>
+
+      </form>
     </section>
 
     <section id="alunos">
@@ -187,4 +213,5 @@
   </footer>
 </body>
 </html>
+
 
