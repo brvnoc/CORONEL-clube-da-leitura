@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clube da Leitura - Escola Coronel Joaquim Freitas Melro</title>
+  <style>
+    :root {
+      --roxo-escuro: #4b2e83;
+      --roxo-medio: #673ab7;
+      --cinza-claro: #f3f3f3;
+      --cinza: #eee;
+      --fonte-principal: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--fonte-principal);
+      background-color: #fefefe;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background-color: var(--roxo-escuro);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+    nav {
+      background-color: var(--roxo-medio);
+      padding: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+    nav a:focus, nav a:hover {
+      text-decoration: underline;
+      outline: 2px solid yellow;
+      background-color: #5e35b1;
+    }
+    section {
+      padding: 50px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 {
+      color: var(--roxo-escuro);
+    }
+    .resenha {
+      background: var(--cinza);
+      padding: 15px;
+      border-left: 5px solid var(--roxo-escuro);
+      margin-bottom: 20px;
+    }
+    .galeria {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    .galeria img {
+      width: 100%;
+      max-width: 280px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .card {
+      background-color: var(--cinza-claro);
+      border-radius: 10px;
+      padding: 25px;
+      margin: 15px 0;
+      box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+    }
+    footer {
+      background: var(--roxo-escuro);
+      color: white;
+      text-align: center;
+      padding: 25px 20px;
+      font-size: 0.9rem;
+    }
+    a {
+      color: var(--roxo-escuro);
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 tabindex="0">Clube da Leitura</h1>
+    <p tabindex="0">Escola Coronel Joaquim Freitas Melro</p>
+  </header>
+
+  <nav aria-label="Navegação principal">
+    <a href="#sobre">Sobre</a>
+    <a href="#professores">Professores</a>
+    <a href="#alunos">Alunos</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#oficinas">Oficinas e Eventos</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <main>
+    <section id="sobre">
+      <h2 tabindex="0">Sobre o Clube</h2>
+      <div class="card">
+        <p>O Clube da Leitura é um espaço para incentivar a leitura, a escrita e a criatividade entre os estudantes da nossa escola. Com encontros semanais, leituras compartilhadas e produções autorais, o clube fortalece o gosto pela literatura e pela troca de ideias.</p>
+      </div>
+    </section>
+
+    <section id="professores">
+      <h2 tabindex="0">Professores Envolvidos</h2>
+      <div class="card">
+        <ul>
+          <li><strong>Prof. Bruno Lima</strong> – Idealizador do projeto e orientador dos encontros.</li>
+          <li><strong>Profª. Cleide</strong> – Apoio pedagógico e responsável pelas leituras guiadas.</li>
+          <li><strong>Prof. Avaninho</strong> – Conduz oficinas de escrita criativa e projetos literários.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="alunos">
+      <h2 tabindex="0">Participação dos Alunos</h2>
+      <div class="card">
+        <p>Alunos do 6º ao 9º ano participam das atividades do clube. Todos os meses, eles se reúnem para discutir livros, criar textos autorais e montar exposições literárias. A cada encontro, um grupo de estudantes apresenta sua leitura favorita e compartilha impressões.</p>
+      </div>
+    </section>
+
+    <section id="galeria">
+      <h2 tabindex="0">Galeria de Fotos</h2>
+      <div class="galeria">
+        <img src="https://via.placeholder.com/250x160?text=Encontro+1" alt="Primeiro encontro do clube com leitura em grupo">
+        <img src="https://via.placeholder.com/250x160?text=Leitura+coletiva" alt="Alunos fazendo leitura coletiva">
+        <img src="https://via.placeholder.com/250x160?text=Apresentacao" alt="Apresentação de alunos sobre livros lidos">
+      </div>
+    </section>
+
+    <section id="oficinas">
+      <h2 tabindex="0">Oficinas e Eventos</h2>
+      <div class="card">
+        <ul>
+          <li><strong>Roda de leitura com autores locais</strong> – Abril</li>
+          <li><strong>Oficina de criação de cordel</strong> – Maio</li>
+          <li><strong>Sarau de encerramento</strong> – Junho</li>
+          <li><strong>Feira Literária da Escola</strong> – Outubro</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contato">
+      <h2 tabindex="0">Contato</h2>
+      <div class="card">
+        <p>📧 Email: <a href="mailto:escola@exemplo.com">escola@exemplo.com</a></p>
+        <p>📍 Endereço: Rua Principal, S/N, Belo Monte - AL</p>
+        <p>📞 Telefone: (82) 99999-9999</p>
+        <p>📱 Instagram: <a href="https://instagram.com/reveriescrita" target="_blank">@reveriescrita</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Clube da Leitura - Escola Coronel Joaquim Freitas Melro. Desenvolvido com ♥ por alunos e professores.</p>
+  </footer>
+</body>
+</html>
