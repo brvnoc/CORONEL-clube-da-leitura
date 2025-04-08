@@ -82,16 +82,8 @@
       border-top: 4px dashed var(--dourado-suave);
     }
 
-    a {
-      color: var(--marrom-escuro);
-    }
-
     .admin-painel {
       display: none;
-      margin-top: 20px;
-    }
-
-    .admin-edit {
       margin-top: 20px;
     }
 
@@ -101,37 +93,8 @@
       margin-bottom: 10px;
     }
 
-    .upload-arquivos {
-      margin-top: 20px;
-    }
-
     .upload-arquivos input[type="file"] {
       margin-bottom: 10px;
-    }
-
-    .botao-whatsapp {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25d366;
-      color: white;
-      font-size: 28px;
-      text-align: center;
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
-      transition: transform 0.3s, background-color 0.3s;
-      z-index: 1000;
-    }
-
-    .botao-whatsapp:hover {
-      background-color: #128c7e;
-      transform: scale(1.1);
     }
 
     .ia-chat {
@@ -154,8 +117,26 @@
       border-left: 4px solid #8b5e3c;
       border-radius: 5px;
     }
+
+    .lista-documentos {
+      background-color: #f9f5e3;
+      padding: 15px;
+      border: 1px solid #ccc;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+
+    #conteudo-salvo {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #fefaf2;
+      border: 2px dashed var(--marrom-claro);
+      border-radius: 10px;
+    }
   </style>
   <script>
+    let arquivosSalvos = [];
+
     function verificarLogin(event) {
       event.preventDefault();
       const usuario = document.getElementById('usuario').value;
@@ -164,6 +145,7 @@
 
       if ((usuario === 'admin' && senha === 'admin') || (usuario === 'bruno' && senha === 'letras')) {
         painel.style.display = 'block';
+        exibirDocumentos();
         alert('Login bem-sucedido!');
       } else {
         alert('Usuário ou senha incorretos.');
@@ -171,11 +153,35 @@
     }
 
     function salvarAlteracoes() {
-      alert('Alterações salvas (simulação).');
+      const edicao = document.getElementById('area-edicao').value;
+      const exibicao = document.getElementById('conteudo-salvo');
+
+      if (exibicao) {
+        exibicao.innerHTML = edicao;
+      }
+
+      console.log("Conteúdo salvo:", edicao);
+      alert('Alterações salvas com sucesso!');
     }
 
     function enviarArquivos() {
-      alert('Arquivos enviados com sucesso (simulação).');
+      const input = document.getElementById('input-arquivo');
+      const lista = document.getElementById('lista-arquivos');
+      if (input.files.length > 0) {
+        for (let i = 0; i < input.files.length; i++) {
+          const nome = input.files[i].name;
+          arquivosSalvos.push(nome);
+        }
+        exibirDocumentos();
+        alert('Arquivos enviados com sucesso!');
+      }
+    }
+
+    function exibirDocumentos() {
+      const lista = document.getElementById('lista-arquivos');
+      if (lista) {
+        lista.innerHTML = '<h3>Documentos Enviados:</h3><ul>' + arquivosSalvos.map(arquivo => `<li>${arquivo}</li>`).join('') + '</ul>';
+      }
     }
 
     function enviarParaIA() {
@@ -202,105 +208,49 @@
 </head>
 <body>
   <header>
-    <h1 tabindex="0">CLUBE DA LEITURA</h1>
-    <p tabindex="0">Escola Coronel Joaquim Freitas Melro</p>
+    <h1>Clube da Leitura - Escola Coronel Joaquim Freitas Melro</h1>
   </header>
-
-  <nav aria-label="Navegação principal">
-    <a href="#sobre">Sobre</a>
-    <a href="#atividades">Atividades</a>
-    <a href="#galeria">Galeria</a>
-    <a href="#alunos">Área do Aluno</a>
-    <a href="#contato">Contato</a>
-    <a href="#admin">Área Administrativa</a>
+  <nav>
+    <a href="#">Início</a>
+    <a href="#">Sobre</a>
+    <a href="#">Contato</a>
   </nav>
 
-  <main>
-    <section id="sobre">
-      <h2 tabindex="0">Sobre o Clube</h2>
-      <div class="card">
-        <p>O Clube da Leitura é um espaço que celebra a paixão pelos livros e a imaginação criativa...</p>
+  <section>
+    <h2>Área Administrativa</h2>
+    <form onsubmit="verificarLogin(event)">
+      <input type="text" id="usuario" placeholder="Usuário" required />
+      <input type="password" id="senha" placeholder="Senha" required />
+      <button type="submit">Entrar</button>
+    </form>
+
+    <div id="painel-admin" class="admin-painel">
+      <div class="admin-edit">
+        <h3>Editor de Conteúdo</h3>
+        <textarea id="area-edicao" placeholder="Escreva algo para salvar..."></textarea>
+        <button onclick="salvarAlteracoes()">Salvar Alterações</button>
+        <div id="conteudo-salvo"></div>
       </div>
-    </section>
 
-    <section id="atividades">
-      <h2 tabindex="0">Atividades</h2>
-      <div class="card">
-        <p>As atividades do clube incluem rodas de leitura, oficinas de escrita criativa, além da biblioteca interativa, galeria de fotos, blog de resenhas e calendário de eventos da escola e do clube.</p>
+      <div class="upload-arquivos">
+        <h3>Upload de Arquivos</h3>
+        <input type="file" id="input-arquivo" multiple />
+        <button onclick="enviarArquivos()">Enviar Arquivos</button>
       </div>
-    </section>
 
-    <section id="galeria">
-      <h2 tabindex="0">Galeria de Fotos</h2>
-      <div class="card">
-        <p>Veja alguns dos momentos especiais do nosso Clube da Leitura:</p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 20px;">
-          <img src="https://via.placeholder.com/200" alt="Foto 1" style="width: 100%; border-radius: 8px;">
-          <img src="https://via.placeholder.com/200" alt="Foto 2" style="width: 100%; border-radius: 8px;">
-          <img src="https://via.placeholder.com/200" alt="Foto 3" style="width: 100%; border-radius: 8px;">
-        </div>
+      <div id="lista-arquivos" class="lista-documentos"></div>
+
+      <div class="ia-chat">
+        <h3>Assistente IA</h3>
+        <textarea id="mensagem-ia" placeholder="Pergunte algo..."></textarea>
+        <button onclick="enviarParaIA()">Perguntar</button>
+        <div id="resposta-ia" class="ia-resposta"></div>
       </div>
-    </section>
-
-    <section id="alunos">
-      <h2 tabindex="0">Área do Aluno</h2>
-      <div class="card">
-        <p>Os alunos acessam materiais, enviam textos e acompanham participações.</p>
-      </div>
-    </section>
-
-    <section id="contato">
-      <h2 tabindex="0">Contato</h2>
-      <div class="card">
-        <p>📧 <a href="mailto:clubedaleituracoronel@gmail.com">clubedaleituracoronel@gmail.com</a></p>
-      </div>
-    </section>
-
-    <section id="admin">
-      <h2 tabindex="0">Área Administrativa</h2>
-      <div class="card">
-        <form onsubmit="verificarLogin(event)">
-          <label for="usuario">Usuário:</label><br>
-          <input type="text" id="usuario" name="usuario" required><br><br>
-          <label for="senha">Senha:</label><br>
-          <input type="password" id="senha" name="senha" required><br><br>
-          <button type="submit">Entrar</button>
-        </form>
-      </div>
-      <div id="painel-admin" class="admin-painel card">
-        <h3>Painel Administrativo</h3>
-        <p>Aqui é possível editar o conteúdo das seções do site.</p>
-        <div class="admin-edit">
-          <h4>Editar Área do Aluno</h4>
-          <textarea>Os alunos acessam materiais, enviam textos e acompanham participações.</textarea>
-          <h4>Editar Atividades</h4>
-          <textarea>As atividades do clube incluem rodas de leitura, oficinas de escrita criativa, além da biblioteca interativa, galeria de fotos, blog de resenhas e calendário de eventos da escola e do clube.</textarea>
-          <h4>Editar Blog</h4>
-          <textarea>Resenhas, notícias e textos criativos dos alunos.</textarea>
-          <button onclick="salvarAlteracoes()">Salvar Alterações</button>
-        </div>
-
-        <div class="upload-arquivos">
-          <h4>Gerenciador de Arquivos e Pastas</h4>
-          <input type="file" multiple><br>
-          <button onclick="enviarArquivos()">Enviar Arquivos</button>
-          <p style="margin-top:10px; font-size: 0.9rem; color: gray;">(Simulação de diretório visível apenas para administradores)</p>
-        </div>
-
-        <div class="ia-chat">
-          <h4>Assistente IA</h4>
-          <textarea id="mensagem-ia" placeholder="Digite sua pergunta para a IA..."></textarea><br>
-          <button onclick="enviarParaIA()">Perguntar</button>
-          <div id="resposta-ia" class="ia-resposta"></div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <a href="https://wa.me/5582999999999" target="_blank" class="botao-whatsapp" title="Fale conosco pelo WhatsApp">💬</a>
+    </div>
+  </section>
 
   <footer>
-    <p>&copy; 2025 Clube da Leitura - Escola Coronel Joaquim Freitas Melro. Todos os direitos reservados.</p>
+    &copy; 2025 Clube da Leitura - Todos os direitos reservados.
   </footer>
 </body>
 </html>
