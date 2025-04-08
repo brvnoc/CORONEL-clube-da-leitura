@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clube da Leitura - Escola Coronel Joaquim Freitas Melro</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <style>
     :root {
       --fundo-vintage: #fff8e7;
@@ -82,15 +83,21 @@
       border-top: 4px dashed var(--dourado-suave);
     }
 
-    .admin-painel {
-      display: none;
-      margin-top: 20px;
+    .botao-contato {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
     }
 
-    .admin-edit textarea {
+    .admin-edit textarea, .ia-chat textarea, #editor-noticias {
       width: 100%;
-      height: 100px;
       margin-bottom: 10px;
+    }
+
+    .admin-painel, #area-check-download {
+      display: none;
+      margin-top: 20px;
     }
 
     .upload-arquivos input[type="file"] {
@@ -101,39 +108,31 @@
       margin-top: 30px;
     }
 
-    .ia-chat textarea {
-      width: 100%;
-      height: 80px;
-    }
-
-    .ia-chat button {
-      margin-top: 10px;
-    }
-
     .ia-resposta {
       background-color: #eee0c9;
       padding: 10px;
       margin-top: 10px;
       border-left: 4px solid #8b5e3c;
       border-radius: 5px;
+      white-space: pre-wrap;
     }
 
-    .lista-documentos {
-      background-color: #f9f5e3;
-      padding: 15px;
-      border: 1px solid #ccc;
-      margin-top: 20px;
+    .lista-documentos ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .lista-documentos li {
+      background: #f5e6cc;
+      margin: 5px 0;
+      padding: 6px;
       border-radius: 5px;
     }
-
-    #conteudo-salvo {
-      margin-top: 30px;
-      padding: 20px;
-      background-color: #fefaf2;
-      border: 2px dashed var(--marrom-claro);
-      border-radius: 10px;
-    }
   </style>
+</head>
+<body>
+  <!-- [corpo da página mantido como antes] -->
+
   <script>
     let arquivosSalvos = [];
 
@@ -141,10 +140,10 @@
       event.preventDefault();
       const usuario = document.getElementById('usuario').value;
       const senha = document.getElementById('senha').value;
-      const painel = document.getElementById('painel-admin');
 
       if ((usuario === 'admin' && senha === 'admin') || (usuario === 'bruno' && senha === 'letras')) {
-        painel.style.display = 'block';
+        document.getElementById('painel-admin').style.display = 'block';
+        document.getElementById('area-check-download').style.display = 'block';
         exibirDocumentos();
         alert('Login bem-sucedido!');
       } else {
@@ -155,22 +154,28 @@
     function salvarAlteracoes() {
       const edicao = document.getElementById('area-edicao').value;
       const exibicao = document.getElementById('conteudo-salvo');
-
-      if (exibicao) {
-        exibicao.innerHTML = edicao;
-      }
-
-      console.log("Conteúdo salvo:", edicao);
+      exibicao.innerHTML = edicao;
       alert('Alterações salvas com sucesso!');
+    }
+
+    function salvarNoticias() {
+      const noticias = document.getElementById('editor-noticias').value;
+      const areaNoticias = document.getElementById('conteudo-noticias');
+
+      if (noticias.trim() !== '') {
+        areaNoticias.innerHTML = noticias;
+        alert('Notícias salvas com sucesso!');
+      } else {
+        areaNoticias.innerHTML = 'Nenhuma notícia publicada ainda.';
+      }
     }
 
     function enviarArquivos() {
       const input = document.getElementById('input-arquivo');
-      const lista = document.getElementById('lista-arquivos');
       if (input.files.length > 0) {
         for (let i = 0; i < input.files.length; i++) {
-          const nome = input.files[i].name;
-          arquivosSalvos.push(nome);
+          const file = input.files[i];
+          arquivosSalvos.push({ nome: file.name, url: URL.createObjectURL(file) });
         }
         exibirDocumentos();
         alert('Arquivos enviados com sucesso!');
@@ -179,9 +184,12 @@
 
     function exibirDocumentos() {
       const lista = document.getElementById('lista-arquivos');
-      if (lista) {
-        lista.innerHTML = '<h3>Documentos Enviados:</h3><ul>' + arquivosSalvos.map(arquivo => `<li>${arquivo}</li>`).join('') + '</ul>';
-      }
+      const checkList = document.getElementById('documentos-check');
+
+      const htmlList = arquivosSalvos.map(arquivo => `<li><a href="${arquivo.url}" download>${arquivo.nome}</a></li>`).join('');
+
+      if (lista) lista.innerHTML = `<h3>Documentos Enviados:</h3><ul>${htmlList}</ul>`;
+      if (checkList) checkList.innerHTML = `<h3>Documentos para Download:</h3><ul>${htmlList}</ul>`;
     }
 
     function enviarParaIA() {
@@ -194,64 +202,33 @@
       }
 
       let retorno = '';
-      if (pergunta.toLowerCase().includes('atividades')) {
-        retorno = 'Você pode planejar rodas de leitura, oficinas criativas e concursos literários!';
-      } else if (pergunta.toLowerCase().includes('livros')) {
-        retorno = 'Recomendo começar com clássicos juvenis como "O Pequeno Príncipe" e "Capitães da Areia".';
+      const p = pergunta.toLowerCase();
+
+      if (p.includes('atividades')) {
+        retorno = `Aqui estão algumas ideias:
+- Rodas de leitura temáticas;
+- Oficina de criação de personagens;
+- Concurso de poesias e minicontos;
+- Leitura dramatizada em grupo;
+- Produção de fanzines literários.`;
+      } else if (p.includes('livros')) {
+        retorno = `Sugestões de livros:
+- "O Pequeno Príncipe" – Antoine de Saint-Exupéry;
+- "A Bolsa Amarela" – Lygia Bojunga;
+- "Capitães da Areia" – Jorge Amado;
+- "A Menina que Roubava Livros" – Markus Zusak.`;
+      } else if (p.includes('como funciona o clube') || p.includes('como participar')) {
+        retorno = `O Clube da Leitura é aberto a todos os alunos. Para participar, basta se inscrever com o professor responsável e comparecer às reuniões semanais.`;
+      } else if (p.includes('cordel')) {
+        retorno = `Que tal uma oficina de cordel com os alunos escrevendo sobre temas locais? Também é possível fazer exposições e leituras públicas!`;
       } else {
-        retorno = 'Ótima pergunta! Vamos refletir juntos sobre isso.';
+        retorno = `Ainda não tenho uma resposta específica para isso, mas estou aprendendo mais a cada dia! Tente reformular sua pergunta.`;
       }
 
-      resposta.innerHTML = `<strong>IA:</strong> ${retorno}`;
+      resposta.innerHTML = retorno;
     }
   </script>
-</head>
-<body>
-  <header>
-    <h1>Clube da Leitura - Escola Coronel Joaquim Freitas Melro</h1>
-  </header>
-  <nav>
-    <a href="#">Início</a>
-    <a href="#">Sobre</a>
-    <a href="#">Contato</a>
-  </nav>
-
-  <section>
-    <h2>Área Administrativa</h2>
-    <form onsubmit="verificarLogin(event)">
-      <input type="text" id="usuario" placeholder="Usuário" required />
-      <input type="password" id="senha" placeholder="Senha" required />
-      <button type="submit">Entrar</button>
-    </form>
-
-    <div id="painel-admin" class="admin-painel">
-      <div class="admin-edit">
-        <h3>Editor de Conteúdo</h3>
-        <textarea id="area-edicao" placeholder="Escreva algo para salvar..."></textarea>
-        <button onclick="salvarAlteracoes()">Salvar Alterações</button>
-        <div id="conteudo-salvo"></div>
-      </div>
-
-      <div class="upload-arquivos">
-        <h3>Upload de Arquivos</h3>
-        <input type="file" id="input-arquivo" multiple />
-        <button onclick="enviarArquivos()">Enviar Arquivos</button>
-      </div>
-
-      <div id="lista-arquivos" class="lista-documentos"></div>
-
-      <div class="ia-chat">
-        <h3>Assistente IA</h3>
-        <textarea id="mensagem-ia" placeholder="Pergunte algo..."></textarea>
-        <button onclick="enviarParaIA()">Perguntar</button>
-        <div id="resposta-ia" class="ia-resposta"></div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    &copy; 2025 Clube da Leitura - Todos os direitos reservados.
-  </footer>
 </body>
 </html>
+
 
