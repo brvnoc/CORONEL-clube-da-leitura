@@ -73,20 +73,6 @@
       box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
     }
 
-    .galeria {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
-
-    .galeria img {
-      max-width: 270px;
-      border: 4px solid var(--marrom-claro);
-      border-radius: 10px;
-      filter: sepia(0.3);
-    }
-
     footer {
       background-color: var(--fundo-cabecalho);
       color: var(--bege);
@@ -100,14 +86,65 @@
       color: var(--marrom-escuro);
     }
 
-    ul {
-      padding-left: 20px;
+    .admin-painel {
+      display: none;
+      margin-top: 20px;
     }
 
-    li {
+    .admin-edit {
+      margin-top: 20px;
+    }
+
+    .admin-edit textarea {
+      width: 100%;
+      height: 100px;
       margin-bottom: 10px;
     }
+
+    .botao-whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      font-size: 28px;
+      text-align: center;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      transition: transform 0.3s, background-color 0.3s;
+      z-index: 1000;
+    }
+
+    .botao-whatsapp:hover {
+      background-color: #128c7e;
+      transform: scale(1.1);
+    }
   </style>
+  <script>
+    function verificarLogin(event) {
+      event.preventDefault();
+      const usuario = document.getElementById('usuario').value;
+      const senha = document.getElementById('senha').value;
+      const painel = document.getElementById('painel-admin');
+
+      if (usuario === 'admin' && senha === 'admin') {
+        painel.style.display = 'block';
+        alert('Login bem-sucedido!');
+      } else {
+        alert('Usuário ou senha incorretos.');
+      }
+    }
+
+    function salvarAlteracoes() {
+      alert('Alterações salvas (simulação).');
+    }
+  </script>
 </head>
 <body>
   <header>
@@ -118,10 +155,6 @@
   <nav aria-label="Navegação principal">
     <a href="#sobre">Sobre</a>
     <a href="#atividades">Atividades</a>
-    <a href="#biblioteca">Biblioteca Virtual</a>
-    <a href="#galeria">Galeria</a>
-    <a href="#blog">Blog</a>
-    <a href="#calendario">Calendário</a>
     <a href="#alunos">Área do Aluno</a>
     <a href="#contato">Contato</a>
     <a href="#admin">Área Administrativa</a>
@@ -131,73 +164,35 @@
     <section id="sobre">
       <h2 tabindex="0">Sobre o Clube</h2>
       <div class="card">
-        <p>O Clube da Leitura é um espaço que celebra a paixão pelos livros e a imaginação criativa. Com encontros regulares, leituras em grupo e oficinas literárias, os alunos são convidados a explorar mundos fantásticos e a criar suas próprias histórias.</p>
+        <p>O Clube da Leitura é um espaço que celebra a paixão pelos livros e a imaginação criativa...</p>
       </div>
     </section>
 
     <section id="atividades">
       <h2 tabindex="0">Atividades</h2>
       <div class="card">
-        <p>As atividades do clube incluem rodas de leitura, oficinas de escrita criativa, debates literários e encontros com autores.</p>
-      </div>
-    </section>
-
-    <section id="biblioteca">
-      <h2 tabindex="0">Biblioteca Virtual</h2>
-      <div class="card">
-        <p>Confira nossa seleção de livros digitais disponíveis para leitura. <a href="#">Acesse aqui</a>.</p>
-      </div>
-    </section>
-
-    <section id="galeria">
-      <h2 tabindex="0">Galeria de Fotos</h2>
-      <div class="galeria">
-        <img src="https://via.placeholder.com/250x160?text=Encontro+1" alt="Primeiro encontro do clube com leitura em grupo">
-        <img src="https://via.placeholder.com/250x160?text=Leitura+coletiva" alt="Alunos fazendo leitura coletiva">
-        <img src="https://via.placeholder.com/250x160?text=Apresentacao" alt="Apresentação de alunos sobre livros lidos">
-      </div>
-    </section>
-
-    <section id="blog">
-      <h2 tabindex="0">Blog</h2>
-      <div class="card">
-        <p>Fique por dentro das novidades do clube, resenhas, textos dos alunos e muito mais.</p>
-      </div>
-    </section>
-
-    <section id="calendario">
-      <h2 tabindex="0">Calendário</h2>
-      <div class="card">
-        <ul>
-          <li><strong>Roda de leitura com autores locais</strong> – Abril</li>
-          <li><strong>Oficina de criação de cordel</strong> – Maio</li>
-          <li><strong>Sarau de encerramento</strong> – Junho</li>
-          <li><strong>Feira Literária da Escola</strong> – Outubro</li>
-        </ul>
+        <p>As atividades do clube incluem rodas de leitura, oficinas de escrita criativa, além da biblioteca interativa, galeria de fotos, blog de resenhas e calendário de eventos da escola e do clube.</p>
       </div>
     </section>
 
     <section id="alunos">
       <h2 tabindex="0">Área do Aluno</h2>
       <div class="card">
-        <p>Aqui os alunos podem acessar materiais, enviar textos e acompanhar suas participações nas atividades do clube.</p>
+        <p>Os alunos acessam materiais, enviam textos e acompanham participações.</p>
       </div>
     </section>
 
     <section id="contato">
       <h2 tabindex="0">Contato</h2>
       <div class="card">
-        <p>📧 Email: <a href="mailto:clubedaleituracoronel@gmail.com">clubedaleituracoronel@gmail.com</a></p>
-        <p>📍 Endereço: Povoado Olho D'água Novo S/N, Belo Monte - AL</p>
-        <p>📞 Telefone: (82) 99915-5372</p>
-        <p>📱 Instagram: <a href="https://instagram.com/lp.brunolima" target="_blank">@lp.brunolima</a></p>
+        <p>📧 <a href="mailto:clubedaleituracoronel@gmail.com">clubedaleituracoronel@gmail.com</a></p>
       </div>
     </section>
 
     <section id="admin">
       <h2 tabindex="0">Área Administrativa</h2>
       <div class="card">
-        <form action="#" method="post">
+        <form onsubmit="verificarLogin(event)">
           <label for="usuario">Usuário:</label><br>
           <input type="text" id="usuario" name="usuario" required><br><br>
           <label for="senha">Senha:</label><br>
@@ -205,13 +200,31 @@
           <button type="submit">Entrar</button>
         </form>
       </div>
+      <div id="painel-admin" class="admin-painel card">
+        <h3>Painel Administrativo</h3>
+        <p>Aqui é possível editar o conteúdo das seções do site.</p>
+        <div class="admin-edit">
+          <h4>Editar Área do Aluno</h4>
+          <textarea>Os alunos acessam materiais, enviam textos e acompanham participações.</textarea>
+          <h4>Editar Atividades</h4>
+          <textarea>As atividades do clube incluem rodas de leitura, oficinas de escrita criativa, além da biblioteca interativa, galeria de fotos, blog de resenhas e calendário de eventos da escola e do clube.</textarea>
+          <h4>Editar Blog</h4>
+          <textarea>Resenhas, notícias e textos criativos dos alunos.</textarea>
+          <button onclick="salvarAlteracoes()">Salvar Alterações</button>
+        </div>
+      </div>
     </section>
   </main>
+
+  <a href="https://wa.me/5582999155372" class="botao-whatsapp" target="_blank" aria-label="Fale conosco pelo WhatsApp">
+    📱
+  </a>
 
   <footer>
     <p>&copy; 2025 Clube da Leitura - Escola Coronel Joaquim Freitas Melro. Criado com afeto por leitores e sonhadores.</p>
   </footer>
 </body>
 </html>
+
 
 
