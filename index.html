@@ -101,6 +101,14 @@
       margin-bottom: 10px;
     }
 
+    .upload-arquivos {
+      margin-top: 20px;
+    }
+
+    .upload-arquivos input[type="file"] {
+      margin-bottom: 10px;
+    }
+
     .botao-whatsapp {
       position: fixed;
       bottom: 20px;
@@ -125,25 +133,37 @@
       background-color: #128c7e;
       transform: scale(1.1);
     }
+
+    .ia-chat {
+      margin-top: 30px;
+    }
+
+    .ia-chat textarea {
+      width: 100%;
+      height: 80px;
+    }
+
+    .ia-chat button {
+      margin-top: 10px;
+    }
+
+    .ia-resposta {
+      background-color: #eee0c9;
+      padding: 10px;
+      margin-top: 10px;
+      border-left: 4px solid #8b5e3c;
+      border-radius: 5px;
+    }
   </style>
   <script>
-    let textos = {
-      aluno: "Os alunos acessam materiais, enviam textos e acompanham participações.",
-      atividades: "As atividades do clube incluem rodas de leitura, oficinas de escrita criativa, além da biblioteca interativa, galeria de fotos, blog de resenhas e calendário de eventos da escola e do clube.",
-      blog: "Resenhas, notícias e textos criativos dos alunos."
-    };
-
     function verificarLogin(event) {
       event.preventDefault();
       const usuario = document.getElementById('usuario').value;
       const senha = document.getElementById('senha').value;
       const painel = document.getElementById('painel-admin');
 
-      if (usuario === 'admin' && senha === 'admin') {
+      if ((usuario === 'admin' && senha === 'admin') || (usuario === 'bruno' && senha === 'letras')) {
         painel.style.display = 'block';
-        document.getElementById('aluno-texto').innerText = textos.aluno;
-        document.getElementById('atividades-texto').innerText = textos.atividades;
-        document.getElementById('blog-texto').innerText = textos.blog;
         alert('Login bem-sucedido!');
       } else {
         alert('Usuário ou senha incorretos.');
@@ -151,13 +171,33 @@
     }
 
     function salvarAlteracoes() {
-      textos.aluno = document.getElementById('edit-aluno').value;
-      textos.atividades = document.getElementById('edit-atividades').value;
-      textos.blog = document.getElementById('edit-blog').value;
-      document.getElementById('aluno-texto').innerText = textos.aluno;
-      document.getElementById('atividades-texto').innerText = textos.atividades;
-      document.getElementById('blog-texto').innerText = textos.blog;
-      alert('Alterações salvas com sucesso!');
+      alert('Alterações salvas (simulação).');
+    }
+
+    function enviarArquivos() {
+      alert('Arquivos enviados com sucesso (simulação).');
+    }
+
+    function enviarParaIA() {
+      const pergunta = document.getElementById('mensagem-ia').value;
+      const resposta = document.getElementById('resposta-ia');
+
+      if (pergunta.trim() === '') {
+        resposta.innerHTML = '<em>Digite algo para conversar com a IA.</em>';
+        return;
+      }
+
+      // Simulação de resposta da IA
+      let retorno = '';
+      if (pergunta.toLowerCase().includes('atividades')) {
+        retorno = 'Você pode planejar rodas de leitura, oficinas criativas e concursos literários!';
+      } else if (pergunta.toLowerCase().includes('livros')) {
+        retorno = 'Recomendo começar com clássicos juvenis como "O Pequeno Príncipe" e "Capitães da Areia".';
+      } else {
+        retorno = 'Ótima pergunta! Vamos refletir juntos sobre isso.';
+      }
+
+      resposta.innerHTML = `<strong>IA:</strong> ${retorno}`;
     }
   </script>
 </head>
@@ -170,8 +210,8 @@
   <nav aria-label="Navegação principal">
     <a href="#sobre">Sobre</a>
     <a href="#atividades">Atividades</a>
+    <a href="#galeria">Galeria</a>
     <a href="#alunos">Área do Aluno</a>
-    <a href="#blog">Blog</a>
     <a href="#contato">Contato</a>
     <a href="#admin">Área Administrativa</a>
   </nav>
@@ -187,21 +227,26 @@
     <section id="atividades">
       <h2 tabindex="0">Atividades</h2>
       <div class="card">
-        <p id="atividades-texto">As atividades do clube incluem rodas de leitura, oficinas de escrita criativa, além da biblioteca interativa, galeria de fotos, blog de resenhas e calendário de eventos da escola e do clube.</p>
+        <p>As atividades do clube incluem rodas de leitura, oficinas de escrita criativa, além da biblioteca interativa, galeria de fotos, blog de resenhas e calendário de eventos da escola e do clube.</p>
+      </div>
+    </section>
+
+    <section id="galeria">
+      <h2 tabindex="0">Galeria de Fotos</h2>
+      <div class="card">
+        <p>Veja alguns dos momentos especiais do nosso Clube da Leitura:</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 20px;">
+          <img src="https://via.placeholder.com/200" alt="Foto 1" style="width: 100%; border-radius: 8px;">
+          <img src="https://via.placeholder.com/200" alt="Foto 2" style="width: 100%; border-radius: 8px;">
+          <img src="https://via.placeholder.com/200" alt="Foto 3" style="width: 100%; border-radius: 8px;">
+        </div>
       </div>
     </section>
 
     <section id="alunos">
       <h2 tabindex="0">Área do Aluno</h2>
       <div class="card">
-        <p id="aluno-texto">Os alunos acessam materiais, enviam textos e acompanham participações.</p>
-      </div>
-    </section>
-
-    <section id="blog">
-      <h2 tabindex="0">Blog do Clube</h2>
-      <div class="card">
-        <p id="blog-texto">Resenhas, notícias e textos criativos dos alunos.</p>
+        <p>Os alunos acessam materiais, enviam textos e acompanham participações.</p>
       </div>
     </section>
 
@@ -228,13 +273,28 @@
         <p>Aqui é possível editar o conteúdo das seções do site.</p>
         <div class="admin-edit">
           <h4>Editar Área do Aluno</h4>
-          <textarea id="edit-aluno">Os alunos acessam materiais, enviam textos e acompanham participações.</textarea>
+          <textarea>Os alunos acessam materiais, enviam textos e acompanham participações.</textarea>
           <h4>Editar Atividades</h4>
-          <textarea id="edit-atividades">As atividades do clube incluem rodas de leitura, oficinas de escrita criativa, além da biblioteca interativa, galeria de fotos, blog de resenhas e calendário de eventos da escola e do clube.</textarea>
+          <textarea>As atividades do clube incluem rodas de leitura, oficinas de escrita criativa, além da biblioteca interativa, galeria de fotos, blog de resenhas e calendário de eventos da escola e do clube.</textarea>
           <h4>Editar Blog</h4>
-          <textarea id="edit-blog">Resenhas, notícias e textos criativos dos alunos.</textarea>
+          <textarea>Resenhas, notícias e textos criativos dos alunos.</textarea>
           <button onclick="salvarAlteracoes()">Salvar Alterações</button>
         </div>
+
+        <div class="upload-arquivos">
+          <h4>Gerenciador de Arquivos e Pastas</h4>
+          <input type="file" multiple><br>
+          <button onclick="enviarArquivos()">Enviar Arquivos</button>
+          <p style="margin-top:10px; font-size: 0.9rem; color: gray;">(Simulação de diretório visível apenas para administradores)</p>
+        </div>
+
+        <div class="ia-chat">
+          <h4>Assistente IA</h4>
+          <textarea id="mensagem-ia" placeholder="Digite sua pergunta para a IA..."></textarea><br>
+          <button onclick="enviarParaIA()">Enviar</button>
+          <div id="resposta-ia" class="ia-resposta"></div>
+        </div>
+
       </div>
     </section>
   </main>
@@ -248,4 +308,3 @@
   </footer>
 </body>
 </html>
-
