@@ -127,6 +127,12 @@
     }
   </style>
   <script>
+    let textos = {
+      aluno: "Os alunos acessam materiais, enviam textos e acompanham participações.",
+      atividades: "As atividades do clube incluem rodas de leitura, oficinas de escrita criativa, além da biblioteca interativa, galeria de fotos, blog de resenhas e calendário de eventos da escola e do clube.",
+      blog: "Resenhas, notícias e textos criativos dos alunos."
+    };
+
     function verificarLogin(event) {
       event.preventDefault();
       const usuario = document.getElementById('usuario').value;
@@ -135,6 +141,9 @@
 
       if (usuario === 'admin' && senha === 'admin') {
         painel.style.display = 'block';
+        document.getElementById('aluno-texto').innerText = textos.aluno;
+        document.getElementById('atividades-texto').innerText = textos.atividades;
+        document.getElementById('blog-texto').innerText = textos.blog;
         alert('Login bem-sucedido!');
       } else {
         alert('Usuário ou senha incorretos.');
@@ -142,7 +151,13 @@
     }
 
     function salvarAlteracoes() {
-      alert('Alterações salvas (simulação).');
+      textos.aluno = document.getElementById('edit-aluno').value;
+      textos.atividades = document.getElementById('edit-atividades').value;
+      textos.blog = document.getElementById('edit-blog').value;
+      document.getElementById('aluno-texto').innerText = textos.aluno;
+      document.getElementById('atividades-texto').innerText = textos.atividades;
+      document.getElementById('blog-texto').innerText = textos.blog;
+      alert('Alterações salvas com sucesso!');
     }
   </script>
 </head>
@@ -156,6 +171,7 @@
     <a href="#sobre">Sobre</a>
     <a href="#atividades">Atividades</a>
     <a href="#alunos">Área do Aluno</a>
+    <a href="#blog">Blog</a>
     <a href="#contato">Contato</a>
     <a href="#admin">Área Administrativa</a>
   </nav>
@@ -171,14 +187,21 @@
     <section id="atividades">
       <h2 tabindex="0">Atividades</h2>
       <div class="card">
-        <p>As atividades do clube incluem rodas de leitura, oficinas de escrita criativa, além da biblioteca interativa, galeria de fotos, blog de resenhas e calendário de eventos da escola e do clube.</p>
+        <p id="atividades-texto">As atividades do clube incluem rodas de leitura, oficinas de escrita criativa, além da biblioteca interativa, galeria de fotos, blog de resenhas e calendário de eventos da escola e do clube.</p>
       </div>
     </section>
 
     <section id="alunos">
       <h2 tabindex="0">Área do Aluno</h2>
       <div class="card">
-        <p>Os alunos acessam materiais, enviam textos e acompanham participações.</p>
+        <p id="aluno-texto">Os alunos acessam materiais, enviam textos e acompanham participações.</p>
+      </div>
+    </section>
+
+    <section id="blog">
+      <h2 tabindex="0">Blog do Clube</h2>
+      <div class="card">
+        <p id="blog-texto">Resenhas, notícias e textos criativos dos alunos.</p>
       </div>
     </section>
 
@@ -205,11 +228,11 @@
         <p>Aqui é possível editar o conteúdo das seções do site.</p>
         <div class="admin-edit">
           <h4>Editar Área do Aluno</h4>
-          <textarea>Os alunos acessam materiais, enviam textos e acompanham participações.</textarea>
+          <textarea id="edit-aluno">Os alunos acessam materiais, enviam textos e acompanham participações.</textarea>
           <h4>Editar Atividades</h4>
-          <textarea>As atividades do clube incluem rodas de leitura, oficinas de escrita criativa, além da biblioteca interativa, galeria de fotos, blog de resenhas e calendário de eventos da escola e do clube.</textarea>
+          <textarea id="edit-atividades">As atividades do clube incluem rodas de leitura, oficinas de escrita criativa, além da biblioteca interativa, galeria de fotos, blog de resenhas e calendário de eventos da escola e do clube.</textarea>
           <h4>Editar Blog</h4>
-          <textarea>Resenhas, notícias e textos criativos dos alunos.</textarea>
+          <textarea id="edit-blog">Resenhas, notícias e textos criativos dos alunos.</textarea>
           <button onclick="salvarAlteracoes()">Salvar Alterações</button>
         </div>
       </div>
@@ -225,6 +248,4 @@
   </footer>
 </body>
 </html>
-
-
 
